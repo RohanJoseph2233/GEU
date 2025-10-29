@@ -6,7 +6,7 @@ import FAQ from './components/FAQ';
 import Courses from './components/Courses';
 import PlacementPartners from './components/Placementpartners';
 import Footer from './components/Footer';
-import StudentLife from './components/Studentslife';
+import StudentLife from './components/StudentsLife';
 import AlumniPlacements from './components/AllumniPlacements';
 
 function App() {
