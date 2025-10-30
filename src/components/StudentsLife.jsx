@@ -17,7 +17,7 @@ const studentLifeImages = [
     desc: "Top recruiters visit every year offering dream jobs and internships across industries.",
   },
   {
-    src: "https://images.unsplash.com/photo-1584697964154-ef58ef6c71f0?auto=format&fit=crop&w=800&q=80",
+    src: "https://plus.unsplash.com/premium_photo-1716767947952-42e8fe3a28a2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070",
     title: "Hostel Life",
     desc: "Comfortable hostels with modern facilities, fostering a home-away-from-home experience.",
   },
@@ -33,7 +33,7 @@ const studentLifeImages = [
   },
 ];
 
-export default function StudentLife() {
+export default function StudentsLife() {
   return (
     <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-blue-100">
       <div className="max-w-6xl mx-auto px-6">
@@ -70,4 +70,5 @@ export default function StudentLife() {
     </section>
   );
 }
+
 
