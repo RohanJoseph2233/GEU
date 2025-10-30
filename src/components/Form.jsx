@@ -154,204 +154,210 @@ export default function Form() {
   const departments = Object.keys(departmentsAndCourses);
   const courses = form.department ? departmentsAndCourses[form.department] : [];
 
-  return (
-    <div
-      className="relative min-h-screen w-full flex items-center justify-end bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage:
-          "url('https://upload.wikimedia.org/wikipedia/commons/c/c3/Aerial_view_of_graphic_era_university.jpg')",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/30"></div>
+return (
+  <div
+    className="relative min-h-screen w-full flex flex-col md:flex-row items-center md:justify-end bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage:
+        "url('https://upload.wikimedia.org/wikipedia/commons/c/c3/Aerial_view_of_graphic_era_university.jpg')",
+    }}
+  >
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-black/50 md:bg-black/30"></div>
 
-      <img
-        src="https://www.timeshighereducation.com/cms-academic/sites/default/files/migrated_institution_logos/geu_logo_-_india.png"
-        alt="Graphic Era University Logo"
-        className="absolute top-6 left-8 w-48 md:w-56 h-auto drop-shadow-xl z-20"
-      />
+    {/* College Logo */}
+    <img
+      src="https://www.timeshighereducation.com/cms-academic/sites/default/files/migrated_institution_logos/geu_logo_-_india.png"
+      alt="Graphic Era University Logo"
+      className="relative z-20 w-44 sm:w-52 md:w-56 mt-6 md:mt-8 md:absolute md:top-6 md:left-8 h-auto drop-shadow-2xl"
+    />
 
-      <div className="absolute bottom-10 left-10 max-w-lg text-white z-20">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-          Admissions Open 2025
-        </h1>
-        <p className="text-lg md:text-xl font-medium mb-4 leading-relaxed">
-          Begin your career at the university ranked{" "}
-          <span className="font-bold text-yellow-300">48</span> amongst top
-          universities of India by{" "}
-          <span className="font-semibold text-yellow-300">
-            NIRF 2025 Ranking
-          </span>{" "}
-          — with consistently high placement records and the{" "}
-          <span className="text-yellow-300 font-semibold">
-            Highest package of ₹61.99 Lacs at Atlassian.
-          </span>
-        </p>
-      </div>
-
-      <div className="relative z-20 bg-white rounded-2xl shadow-2xl p-8 my-10 max-w-sm w-full mr-20 border border-blue-100 backdrop-blur-sm">
-        <h2 className="text-2xl font-bold mb-5 text-center text-blue-800">
-          Apply for Admission
-        </h2>
-        <p className="text-center text-gray-600 mb-6 text-sm">
-          Join one of India’s leading universities today!
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Full Name, Email, Phone */}
-          {["fullName", "email", "phone"].map((field) => (
-            <div key={field}>
-              <label className="block mb-1 font-semibold text-gray-700 text-sm capitalize">
-                {field === "fullName"
-                  ? "Full Name"
-                  : field.charAt(0).toUpperCase() + field.slice(1)}
-              </label>
-              <input
-                type={field === "email" ? "email" : "text"}
-                name={field}
-                value={form[field]}
-                onChange={handleChange}
-                className="w-full border border-gray-300 px-3 py-2 text-sm"
-                placeholder={`Enter your ${field}`}
-              />
-              {errors[field] && (
-                <p className="text-red-500 text-xs mt-1">{errors[field]}</p>
-              )}
-            </div>
-          ))}
-
-          {/* State */}
-          <div>
-            <label className="block mb-1 font-semibold text-gray-700 text-sm">
-              State
-            </label>
-            <select
-              name="state"
-              value={form.state}
-              onChange={handleChange}
-              className="w-full border border-gray-300 px-3 py-2 text-sm"
-            >
-              <option value="">Select State</option>
-              {states.map((state) => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
-              ))}
-            </select>
-            {errors.state && (
-              <p className="text-red-500 text-xs mt-1">{errors.state}</p>
-            )}
-          </div>
-
-          {/* City */}
-          <div>
-            <label className="block mb-1 font-semibold text-gray-700 text-sm">
-              City
-            </label>
-            <select
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              disabled={!form.state}
-              className="w-full border border-gray-300 px-3 py-2 text-sm"
-            >
-              <option value="">
-                {form.state ? "Select City" : "Select State first"}
-              </option>
-              {cities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-            {errors.city && (
-              <p className="text-red-500 text-xs mt-1">{errors.city}</p>
-            )}
-          </div>
-
-          {/* Department */}
-          <div>
-            <label className="block mb-1 font-semibold text-gray-700 text-sm">
-              Department
-            </label>
-            <select
-              name="department"
-              value={form.department}
-              onChange={handleChange}
-              className="w-full border border-gray-300 px-3 py-2 text-sm"
-            >
-              <option value="">Select Department</option>
-              {departments.map((dept) => (
-                <option key={dept} value={dept}>
-                  {dept}
-                </option>
-              ))}
-            </select>
-            {errors.department && (
-              <p className="text-red-500 text-xs mt-1">{errors.department}</p>
-            )}
-          </div>
-
-          {/* Course */}
-          <div>
-            <label className="block mb-1 font-semibold text-gray-700 text-sm">
-              Course
-            </label>
-            <select
-              name="course"
-              value={form.course}
-              onChange={handleChange}
-              disabled={!form.department}
-              className="w-full border border-gray-300 px-3 py-2 text-sm"
-            >
-              <option value="">
-                {form.department ? "Select Course" : "Select Department first"}
-              </option>
-              {courses.map((course) => (
-                <option key={course} value={course}>
-                  {course}
-                </option>
-              ))}
-            </select>
-            {errors.course && (
-              <p className="text-red-500 text-xs mt-1">{errors.course}</p>
-            )}
-          </div>
-
-          {/* Consent */}
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="consent"
-              checked={form.consent}
-              onChange={handleChange}
-              className="mr-2"
-            />
-            <label className="text-gray-700 text-xs">
-              I authorize the university to contact me via Email/SMS/Call.
-            </label>
-          </div>
-          {errors.consent && (
-            <p className="text-red-500 text-xs mt-1">{errors.consent}</p>
-          )}
-
-          {/* Submit */}
-          <button
-            type="submit"
-            className="w-full bg-blue-700 text-white py-2.5 rounded-lg font-semibold shadow-md hover:bg-blue-800 text-sm"
-          >
-            Submit Application
-          </button>
-        </form>
-
-        {message && (
-          <p className="mt-4 text-center text-blue-700 font-medium text-sm">
-            {message}
-          </p>
-        )}
-      </div>
+    {/* Hero Text Section */}
+    <div className="relative z-20 text-white text-center md:text-left px-5 mt-5 md:mt-0 md:max-w-lg md:absolute md:bottom-10 md:left-10">
+      <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-3 leading-tight">
+        Admissions Open 2025
+      </h1>
+      <p className="text-sm sm:text-base md:text-xl font-medium mb-3 leading-relaxed">
+        Begin your career at the university ranked{" "}
+        <span className="font-bold text-yellow-300">48</span> amongst top
+        universities of India by{" "}
+        <span className="font-semibold text-yellow-300">
+          NIRF 2025 Ranking
+        </span>{" "}
+        — with consistently high placement records and the{" "}
+        <span className="text-yellow-300 font-semibold">
+          Highest package of ₹61.99 Lacs at Atlassian.
+        </span>
+      </p>
     </div>
-  );
+
+    {/* Form Section */}
+    <div className="relative z-20 bg-white rounded-xl shadow-2xl p-4 sm:p-5 md:p-6 mt-5 mb-8 mx-4 w-[90%] max-w-sm md:max-w-sm md:mr-20 border border-blue-100 backdrop-blur-sm overflow-y-auto md:overflow-visible max-h-[85vh] md:max-h-none">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 text-center text-blue-800">
+        Apply for Admission
+      </h2>
+      <p className="text-center text-gray-600 mb-5 text-xs sm:text-sm">
+        Join one of India’s leading universities today!
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+        {["fullName", "email", "phone"].map((field) => (
+          <div key={field}>
+            <label className="block mb-1 font-semibold text-gray-700 text-xs sm:text-sm capitalize">
+              {field === "fullName"
+                ? "Full Name"
+                : field.charAt(0).toUpperCase() + field.slice(1)}
+            </label>
+            <input
+              type={field === "email" ? "email" : "text"}
+              name={field}
+              value={form[field]}
+              onChange={handleChange}
+              className="w-full border border-gray-300 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder={`Enter your ${field}`}
+            />
+            {errors[field] && (
+              <p className="text-red-500 text-[10px] mt-1">{errors[field]}</p>
+            )}
+          </div>
+        ))}
+
+        {/* State */}
+        <div>
+          <label className="block mb-1 font-semibold text-gray-700 text-xs sm:text-sm">
+            State
+          </label>
+          <select
+            name="state"
+            value={form.state}
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select State</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
+          {errors.state && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.state}</p>
+          )}
+        </div>
+
+        {/* City */}
+        <div>
+          <label className="block mb-1 font-semibold text-gray-700 text-xs sm:text-sm">
+            City
+          </label>
+          <select
+            name="city"
+            value={form.city}
+            onChange={handleChange}
+            disabled={!form.state}
+            className="w-full border border-gray-300 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">
+              {form.state ? "Select City" : "Select State first"}
+            </option>
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          {errors.city && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.city}</p>
+          )}
+        </div>
+
+        {/* Department */}
+        <div>
+          <label className="block mb-1 font-semibold text-gray-700 text-xs sm:text-sm">
+            Department
+          </label>
+          <select
+            name="department"
+            value={form.department}
+            onChange={handleChange}
+            className="w-full border border-gray-300 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Department</option>
+            {departments.map((dept) => (
+              <option key={dept} value={dept}>
+                {dept}
+              </option>
+            ))}
+          </select>
+          {errors.department && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.department}</p>
+          )}
+        </div>
+
+        {/* Course */}
+        <div>
+          <label className="block mb-1 font-semibold text-gray-700 text-xs sm:text-sm">
+            Course
+          </label>
+          <select
+            name="course"
+            value={form.course}
+            onChange={handleChange}
+            disabled={!form.department}
+            className="w-full border border-gray-300 px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">
+              {form.department ? "Select Course" : "Select Department first"}
+            </option>
+            {courses.map((course) => (
+              <option key={course} value={course}>
+                {course}
+              </option>
+            ))}
+          </select>
+          {errors.course && (
+            <p className="text-red-500 text-[10px] mt-1">{errors.course}</p>
+          )}
+        </div>
+
+        {/* Consent */}
+        <div className="flex items-start space-x-2">
+          <input
+            type="checkbox"
+            name="consent"
+            checked={form.consent}
+            onChange={handleChange}
+            className="mt-0.5 scale-90"
+          />
+          <label className="text-gray-700 text-[11px] sm:text-xs leading-snug">
+            I authorize the university to contact me via Email/SMS/Call.
+          </label>
+        </div>
+        {errors.consent && (
+          <p className="text-red-500 text-[10px] mt-1">{errors.consent}</p>
+        )}
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-blue-700 text-white py-2 rounded-md font-semibold shadow-md hover:bg-blue-800 text-xs sm:text-sm transition"
+        >
+          Submit Application
+        </button>
+      </form>
+
+      {message && (
+        <p className="mt-3 text-center text-blue-700 font-medium text-xs sm:text-sm">
+          {message}
+        </p>
+      )}
+    </div>
+  </div>
+);
+
+
 }
+
 
 
 
